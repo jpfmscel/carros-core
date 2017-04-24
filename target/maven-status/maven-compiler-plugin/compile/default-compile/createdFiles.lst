@@ -1,0 +1,5 @@
+base/BaseDAO.class
+users/entidades/User.class
+users/service/UserService.class
+base/BaseService.class
+users/dao/UserDao.class
