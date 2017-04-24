@@ -40,3 +40,4 @@ Thumbs.db
 .project
 .settings/*
 target/*
+/target/
