@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
 
@@ -27,4 +28,8 @@ public abstract class BaseDAO<T> {
 		return;
 	}
 
+	public Query<T> getQuery(){
+		return (Query<T>) ds.createQuery(getClasse());
+	}
+	
 }

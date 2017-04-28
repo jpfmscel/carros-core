@@ -2,6 +2,8 @@ package base;
 
 import java.util.List;
 
+import org.mongodb.morphia.query.Query;
+
 public abstract class BaseService<T> {
 
 	public abstract Class<T> getClasse();
@@ -18,6 +20,10 @@ public abstract class BaseService<T> {
 
 	public List<T> findAll() {
 		return getDao().findAll();
+	}
+	
+	public Query<T> getQuery(){
+		return getDao().getQuery();
 	}
 
 }
