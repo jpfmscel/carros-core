@@ -1,7 +1,6 @@
-package users.entidades;
+package entidades;
 
 import java.util.Date;
-import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -17,7 +16,7 @@ public class User {
 
 	public User() {
 	}
-	
+
 	public User(String email, String name, String password, Date creationDate) {
 		setEmail(email);
 		setName(name);
@@ -40,8 +39,6 @@ public class User {
 	@Property
 	private Date creationDate;
 
-	private List<Pergunta> perguntasFeitas;
-	
 	public ObjectId getId() {
 		return id;
 	}
@@ -86,14 +83,6 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + ", creationDate="
 				+ creationDate + "]";
-	}
-
-	public List<Pergunta> getPerguntasFeitas() {
-		return perguntasFeitas;
-	}
-
-	public void setPerguntasFeitas(List<Pergunta> perguntasFeitas) {
-		this.perguntasFeitas = perguntasFeitas;
 	}
 
 }

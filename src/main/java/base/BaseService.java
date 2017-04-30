@@ -14,15 +14,15 @@ public abstract class BaseService<T> {
 		getDao().inserir(obj);
 	}
 
-	public void update(T obj) {
-		getDao().update(obj);
+	public int update(T obj) {
+		return getDao().update(obj);
 	}
 
 	public List<T> findAll() {
 		return getDao().findAll();
 	}
-	
-	public Query<T> getQuery(){
+
+	public Query<T> getQuery() {
 		return getDao().getQuery();
 	}
 

@@ -1,11 +1,11 @@
-package users.service;
+package service;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import base.BaseService;
-import users.dao.UserDao;
-import users.entidades.User;
+import dao.UserDao;
+import entidades.User;
 
 @Stateless
 public class UserService extends BaseService<User> {

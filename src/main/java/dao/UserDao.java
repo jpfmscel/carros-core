@@ -1,9 +1,9 @@
-package users.dao;
+package dao;
 
 import javax.ejb.Stateless;
 
 import base.BaseDAO;
-import users.entidades.User;
+import entidades.User;
 
 @Stateless
 public class UserDao extends BaseDAO<User>{
