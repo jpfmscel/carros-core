@@ -5,16 +5,11 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.Indexed;
-import org.mongodb.morphia.annotations.Indexes;
 import org.mongodb.morphia.annotations.Property;
 
 @Entity("pergunta")
-@Indexes(@Index(value = "perguntaId", fields = @Field("perguntaId")))
-public class Pergunta {
+public class Pergunta extends EntityID {
 
 	public Pergunta(String texto, String userEmail) {
 		setUserEmail(userEmail);
@@ -27,8 +22,14 @@ public class Pergunta {
 	@Id
 	private ObjectId _id;
 
-	@Indexed
-	private long perguntaId;
+	@Property
+	private Long id;
+	
+	@Property
+	private String marcaCarro;
+
+	@Property
+	private String modeloCarro;
 
 	@Property
 	private String texto;
@@ -57,14 +58,6 @@ public class Pergunta {
 		this.respostas = respostas;
 	}
 
-	public long getPerguntaId() {
-		return perguntaId;
-	}
-
-	public void setPerguntaId(long perguntaId) {
-		this.perguntaId = perguntaId;
-	}
-
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -79,6 +72,30 @@ public class Pergunta {
 
 	public void set_id(ObjectId _id) {
 		this._id = _id;
+	}
+
+	public String getMarcaCarro() {
+		return marcaCarro;
+	}
+
+	public void setMarcaCarro(String marcaCarro) {
+		this.marcaCarro = marcaCarro;
+	}
+
+	public String getModeloCarro() {
+		return modeloCarro;
+	}
+
+	public void setModeloCarro(String modeloCarro) {
+		this.modeloCarro = modeloCarro;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

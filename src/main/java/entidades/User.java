@@ -4,15 +4,11 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.Indexes;
 import org.mongodb.morphia.annotations.Property;
 
 @Entity("user")
-@Indexes(@Index(value = "email", fields = @Field("email")))
-public class User {
+public class User extends EntityID {
 
 	public User() {
 	}
@@ -25,7 +21,10 @@ public class User {
 	}
 
 	@Id
-	private ObjectId id;
+	private ObjectId _id;
+
+	@Property
+	private Long id;
 
 	@Property
 	private String email;
@@ -38,14 +37,6 @@ public class User {
 
 	@Property
 	private Date creationDate;
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;
@@ -79,10 +70,12 @@ public class User {
 		this.creationDate = creationDate;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + ", creationDate="
-				+ creationDate + "]";
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.mongodb.morphia.query.Query;
 
-public abstract class BaseService<T> {
+import entidades.EntityID;
+
+public abstract class BaseService<T extends EntityID> {
 
 	public abstract Class<T> getClasse();
 

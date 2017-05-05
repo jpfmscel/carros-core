@@ -1,13 +1,12 @@
 package entidades;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.Indexes;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 
-@Entity("pergunta")
-@Indexes(@Index(value = "id", fields = @Field("id")))
-public class Resposta {
+@Entity("resposta")
+public class Resposta extends EntityID {
 
 	public Resposta() {
 
@@ -19,8 +18,19 @@ public class Resposta {
 		setRespostaCurta(respostaCurta);
 	}
 
+	@Id
+	private ObjectId _id;
+
+	@Property
+	private Long id;
+
+	@Property
 	private String texto;
+
+	@Property
 	private String userEmail;
+
+	@Property
 	private Boolean respostaCurta;
 
 	public String getTexto() {
@@ -45,6 +55,14 @@ public class Resposta {
 
 	public void setRespostaCurta(Boolean respostaCurta) {
 		this.respostaCurta = respostaCurta;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

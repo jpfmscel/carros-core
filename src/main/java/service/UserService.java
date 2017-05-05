@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -25,5 +27,16 @@ public class UserService extends BaseService<User> {
 		}
 		return userDao;
 	}
+
+	public User findByEmail(String email) {
+		return getDao().findByEmail(email);
+	}
+
+	public List<User> findByName(String name) {
+		return getDao().findByName(name);
+	}
+
+	// TODO
+	// public boolean authenticate(User u){}
 
 }

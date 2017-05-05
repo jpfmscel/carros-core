@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import base.BaseService;
@@ -7,6 +10,7 @@ import dao.PerguntaDao;
 import entidades.Pergunta;
 import entidades.Resposta;
 
+@Stateless
 public class PerguntaService extends BaseService<Pergunta> {
 
 	@Inject
@@ -27,5 +31,13 @@ public class PerguntaService extends BaseService<Pergunta> {
 
 	public int adicionarResposta(Pergunta p, Resposta r) {
 		return getDao().adicionarResposta(p, r);
+	}
+
+	public Pergunta findById(Long id) {
+		return getDao().findById(id);
+	}
+
+	public List<Pergunta> findByEmail(String email) {
+		return getDao().findByEmail(email);
 	}
 }
