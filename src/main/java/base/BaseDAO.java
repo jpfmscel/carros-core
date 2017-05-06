@@ -11,8 +11,9 @@ import org.mongodb.morphia.query.UpdateResults;
 import com.mongodb.MongoClient;
 
 import entidades.EntityID;
+import entidades.ID;
 
-public abstract class BaseDAO<T extends EntityID> {
+public abstract class BaseDAO<T extends ID> {
 
 	private Morphia morp = new Morphia();
 	private Datastore ds = morp.createDatastore(new MongoClient("localhost"), "carros");
@@ -23,9 +24,14 @@ public abstract class BaseDAO<T extends EntityID> {
 		return getDs().find(getClasse()).asList();
 	}
 
-	public void inserir(T obj) {
+	public T findByID(Long id) {
+		return getDs().find(getClasse()).field("id").equal(id).get();
+	}
+
+	public String inserir(T obj) {
+		obj.setId(generateId(obj));
 		getDs().save(obj);
-		return;
+		return "OK";
 	}
 
 	public int update(T obj) {
@@ -47,14 +53,14 @@ public abstract class BaseDAO<T extends EntityID> {
 		String collName = getDs().getCollection(getClasse()).getName();
 
 		// find any existing counters for the type
-		Query<T> q = getDs().find(getClasse(), "_id", collName);
+		Query<EntityID> q = getDs().find(EntityID.class, "_id", collName);
 
 		// create an update operation which increments the counter
-		UpdateOperations<T> update = getDs().createUpdateOperations(getClasse()).inc("counter");
+		UpdateOperations<EntityID> update = getDs().createUpdateOperations(EntityID.class).inc("counter");
 
 		// execute on server, if not found null is return,
 		// else the counter is incremented atomically
-		EntityID counter = getDs().findAndModify(q, update);
+		EntityID counter = (EntityID) getDs().findAndModify(q, update);
 
 		if (counter == null) {
 			// so just create one

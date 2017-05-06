@@ -28,6 +28,17 @@ public class UserService extends BaseService<User> {
 		return userDao;
 	}
 
+	@Override
+	public String inserir(User obj) {
+		User findByEmail = findByEmail(obj.getEmail());
+
+		if (findByEmail == null) {
+			return super.inserir(obj);
+		}
+
+		return "[FAILURE] User already registered.";
+	}
+
 	public User findByEmail(String email) {
 		return getDao().findByEmail(email);
 	}
@@ -36,7 +47,9 @@ public class UserService extends BaseService<User> {
 		return getDao().findByName(name);
 	}
 
-	// TODO
-	// public boolean authenticate(User u){}
+	public boolean authenticate(User u) {
+		return getDao().authenticate(u);
+	}
+
 
 }

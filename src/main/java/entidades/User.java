@@ -7,8 +7,10 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
+import com.sun.mail.util.BASE64EncoderStream;
+
 @Entity("user")
-public class User extends EntityID {
+public class User extends ID {
 
 	public User() {
 	}
@@ -22,9 +24,6 @@ public class User extends EntityID {
 
 	@Id
 	private ObjectId _id;
-
-	@Property
-	private Long id;
 
 	@Property
 	private String email;
@@ -59,7 +58,10 @@ public class User extends EntityID {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		StringBuffer sb = new StringBuffer(password);
+		sb.reverse();
+		byte[] encode = BASE64EncoderStream.encode(sb.toString().getBytes());
+		this.password = new String(encode);
 	}
 
 	public Date getCreationDate() {
@@ -68,14 +70,6 @@ public class User extends EntityID {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

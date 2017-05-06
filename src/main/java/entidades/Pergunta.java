@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
 @Entity("pergunta")
-public class Pergunta extends EntityID {
+public class Pergunta extends ID {
 
 	public Pergunta(String texto, String userEmail) {
 		setUserEmail(userEmail);
@@ -22,9 +22,6 @@ public class Pergunta extends EntityID {
 	@Id
 	private ObjectId _id;
 
-	@Property
-	private Long id;
-	
 	@Property
 	private String marcaCarro;
 
@@ -88,14 +85,6 @@ public class Pergunta extends EntityID {
 
 	public void setModeloCarro(String modeloCarro) {
 		this.modeloCarro = modeloCarro;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

@@ -4,20 +4,24 @@ import java.util.List;
 
 import org.mongodb.morphia.query.Query;
 
-import entidades.EntityID;
+import entidades.ID;
 
-public abstract class BaseService<T extends EntityID> {
+public abstract class BaseService<T extends ID> {
 
 	public abstract Class<T> getClasse();
 
 	protected abstract BaseDAO<T> getDao();
 
-	public void inserir(T obj) {
-		getDao().inserir(obj);
+	public String inserir(T obj) {
+		return getDao().inserir(obj);
 	}
 
 	public int update(T obj) {
 		return getDao().update(obj);
+	}
+
+	public T findByID(Long id) {
+		return getDao().findByID(id);
 	}
 
 	public List<T> findAll() {

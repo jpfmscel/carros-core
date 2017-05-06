@@ -23,4 +23,12 @@ public class UserDao extends BaseDAO<User> {
 		return getDs().find(getClasse()).field("name").equalIgnoreCase(name).asList();
 	}
 
+	public boolean authenticate(User u) {
+		User findByEmail = findByEmail(u.getEmail());
+		if (findByEmail != null && findByEmail.getPassword() != null) {
+			return findByEmail.getPassword().equals(u.getPassword());
+		}
+		return false;
+	}
+
 }

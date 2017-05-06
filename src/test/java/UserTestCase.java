@@ -2,30 +2,38 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
 import entidades.User;
 import service.UserService;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserTestCase {
 
 	UserService userService;
+	String email = "test.junit@test.com";
+	User u = new User(email, "Junit", "junit", new Date());
 
 	@Before
 	public void init() {
 		userService = new UserService();
 	}
 
-	@Test
-	public void insert() {
-		User u = new User("test.junit@test.com", "Junit", "junit", new Date());
-		userService.inserir(u);
-		List<User> asList = userService.getQuery().field("email").equalIgnoreCase("test.junit@test.com").asList();
-		assertNotNull(asList);
-		assertTrue(asList.size() > 0);
+//	@Test
+	public void a_insert() {
+		String resultInsert = userService.inserir(u);
+		User user = userService.findByEmail(email);
+
+		System.out.println("Resultado INSERT : " + resultInsert + " - User ID: " + user.getId());
+		assertNotNull(user);
+	}
+
+//	@Test
+	public void b_authenticate() {
+		assertTrue(userService.authenticate(u));
 	}
 
 }

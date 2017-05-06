@@ -19,12 +19,6 @@ public class PerguntaDao extends BaseDAO<Pergunta> {
 		return Pergunta.class;
 	}
 
-	@Override
-	public void inserir(Pergunta obj) {
-		obj.setId(generateId(obj));
-		super.inserir(obj);
-	}
-
 	public int adicionarResposta(Pergunta p, Resposta r) {
 		UpdateOperations<Pergunta> ope = getDs().createUpdateOperations(getClasse()).addToSet("respostas", r);
 		UpdateResults update = getDs().update(p, ope);
@@ -32,7 +26,7 @@ public class PerguntaDao extends BaseDAO<Pergunta> {
 	}
 
 	public Pergunta findById(Long id) {
-		return getDs().find(getClasse()).field("id").equal(id).asList().get(0);
+		return getDs().find(getClasse()).field("id").equal(id).get();
 	}
 
 	public List<Pergunta> findByEmail(String email) {
